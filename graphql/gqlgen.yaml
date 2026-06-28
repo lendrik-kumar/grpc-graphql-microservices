@@ -4,5 +4,5 @@ models:
   Account:
     model: github.com/lendrik-kumar/graphql-grpc-go-microservices/graphql.Account
     fields:
-      oders:
+      orders:
         resolver: true

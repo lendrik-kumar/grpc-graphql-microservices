@@ -1,7 +1,7 @@
 package main
 
 type Account struct {
-	ID     string  `json:"id"`
-	Name   string  `json:"name"`
-	Orders []Orders `json:"orders"`
+	ID     string   `json:"id"`
+	Name   string   `json:"name"`
+	Orders []*Orders `json:"orders"`
 }

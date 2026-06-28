@@ -1,10 +1,11 @@
 package main
 
+import "context"
 
-// type accountResolver struct {
-// 	server *Server
-// }
+type AccountResolver struct {
+	server *Server
+}
 
-// func (r *accountResolver) Orders(ctx context.Context, obj *Account) ([]*Orders, error) {
-// 	panic("unimplemented")
-// }
+func (r *AccountResolver) Orders(ctx context.Context, obj *Account) ([]*Orders, error) {
+	return obj.Orders, nil
+}
