@@ -1,14 +1,13 @@
-FROM golang:1.25-alpine AS build
+FROM golang:1.23-alpine AS build
 
 RUN apk --no-cache add gcc g++ make ca-certificates git
 
 WORKDIR /go/src/github.com/lendrik-kumar/graphql-grpc-go-microservices
 
 COPY go.mod go.sum ./
+COPY order/ order/
 
-COPY account/ account/
-
-RUN go build -o /go/bin/app ./account/cmd/account
+RUN go build -o /go/bin/app ./order/cmd/order
 
 FROM alpine:3.11
 WORKDIR /usr/bin

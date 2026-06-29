@@ -1,35 +1,34 @@
+//go:generate go run github.com/99designs/gqlgen
 package main
 
 import (
 	"log"
 	"net/http"
 
-	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/handler"
 	"github.com/kelseyhightower/envconfig"
 )
 
 type AppConfig struct {
-	AccountURL string `envconfig:"ACCOUNT_URL"`
-	CatalogURL string `envconfig:"CATALOG_URL"`
-	OrderURL   string `envconfig:"ORDER_URL"`
+	AccountURL string `envconfig:"ACCOUNT_SERVICE_URL"`
+	CatalogURL string `envconfig:"CATALOG_SERVICE_URL"`
+	OrderURL   string `envconfig:"ORDER_SERVICE_URL"`
 }
 
 func main() {
-	var config AppConfig
-
-	err := envconfig.Process("", &config)
+	var cfg AppConfig
+	err := envconfig.Process("", &cfg)
 	if err != nil {
-		log.Fatalf("Failed to process env config: %v", err)
+		log.Fatal(err)
 	}
 
-	s, err := NewGraphQLServer(config.AccountURL, config.CatalogURL, config.OrderURL)
+	s, err := NewGraphQLServer(cfg.AccountURL, cfg.CatalogURL, cfg.OrderURL)
 	if err != nil {
-		log.Fatalf("Failed to create GraphQL server: %v", err)
+		log.Fatal(err)
 	}
 
-	http.Handle("/graphql", handler.New(s.ToExecutableSchema()))
-	http.Handle("/play", playground.Handler("sanket", "/graphql"))
+	http.Handle("/graphql", handler.GraphQL(s.ToExecutableSchema()))
+	http.Handle("/playground", handler.Playground("akhil", "/graphql"))
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
