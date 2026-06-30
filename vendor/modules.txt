@@ -10,6 +10,7 @@ github.com/99designs/gqlgen/graphql/handler/lru
 github.com/99designs/gqlgen/graphql/handler/transport
 github.com/99designs/gqlgen/graphql/introspection
 github.com/99designs/gqlgen/graphql/playground
+github.com/99designs/gqlgen/handler
 # github.com/agnivade/levenshtein v1.2.1
 ## explicit; go 1.21
 github.com/agnivade/levenshtein
@@ -66,7 +67,7 @@ github.com/sosodev/duration
 # github.com/tinrab/retry v1.0.0
 ## explicit
 github.com/tinrab/retry
-# github.com/vektah/gqlparser/v2 v2.5.31
+# github.com/vektah/gqlparser/v2 v2.5.35
 ## explicit; go 1.22
 github.com/vektah/gqlparser/v2
 github.com/vektah/gqlparser/v2/ast
